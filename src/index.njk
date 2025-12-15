@@ -1,12 +1,26 @@
 ---
 layout: base.njk
 title: MTS-Gaming - Home
+links:
+  - href: "https://discord.gg/3Fx7Sjt"
+    icon: "🎧"
+    title: "Discord"
+    description: "Join our Discord"
+  - href: "https://steamcommunity.com/groups/mtsgaming"
+    icon: "🎮"
+    title: "Steam"
+    description: "Join our Steam group"
+stats:
+  - number: "69+"
+    label: "MEMBERS"
+  - number: "24/7"
+    label: "ONLINE"
 ---
 
 <header class="header">
     <div class="logo-container">
         <h1 class="logo glitch" data-text="MTS-GAMING">MTS-GAMING</h1>
-        <p class="tagline">ELITE GAMING CLAN</p>
+        <p class="tagline">It's all about headshots</p>
     </div>
 </header>
 
@@ -15,7 +29,7 @@ title: MTS-Gaming - Home
         <div class="welcome-box">
             <h2 class="section-title">WELCOME TO THE ARENA</h2>
             <p class="welcome-text">
-                Join the ranks of elite gamers. We dominate the battlefield, 
+                Join our ranks. We dominate the battlefield, 
                 conquer the leaderboards, and forge legends.
             </p>
         </div>
@@ -24,55 +38,26 @@ title: MTS-Gaming - Home
     <section class="links-section">
         <h2 class="section-title">CONNECT WITH US</h2>
         <div class="links-grid">
-            <a href="#" class="link-card" data-glow>
-                <div class="link-icon">🎮</div>
-                <h3>Discord</h3>
-                <p>Join our community</p>
+            {% for link in links %}
+            <a href="{{ link.href }}" class="link-card" target="_blank" data-glow>
+                <div class="link-icon">{{ link.icon }}</div>
+                <h3>{{ link.title }}</h3>
+                <p>{{ link.description }}</p>
             </a>
-            <a href="#" class="link-card" data-glow>
-                <div class="link-icon">📺</div>
-                <h3>Twitch</h3>
-                <p>Watch us live</p>
-            </a>
-            <a href="#" class="link-card" data-glow>
-                <div class="link-icon">🎬</div>
-                <h3>YouTube</h3>
-                <p>Epic moments</p>
-            </a>
-            <a href="#" class="link-card" data-glow>
-                <div class="link-icon">🐦</div>
-                <h3>Twitter</h3>
-                <p>Latest updates</p>
-            </a>
-            <a href="#" class="link-card" data-glow>
-                <div class="link-icon">📷</div>
-                <h3>Instagram</h3>
-                <p>Behind the scenes</p>
-            </a>
-            <a href="#" class="link-card" data-glow>
-                <div class="link-icon">⚡</div>
-                <h3>Tournaments</h3>
-                <p>Upcoming events</p>
-            </a>
+            {% endfor %}
         </div>
     </section>
 
     <section class="stats-section">
+        {% for stat in stats %}
         <div class="stat-box">
-            <div class="stat-number">1337</div>
-            <div class="stat-label">VICTORIES</div>
+            <div class="stat-number">{{ stat.number }}</div>
+            <div class="stat-label">{{ stat.label }}</div>
         </div>
-        <div class="stat-box">
-            <div class="stat-number">50+</div>
-            <div class="stat-label">MEMBERS</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-number">24/7</div>
-            <div class="stat-label">ONLINE</div>
-        </div>
+        {% endfor %}
     </section>
 </main>
 
 <footer class="footer">
-    <p>&copy; 2024 MTS-Gaming. All rights reserved. GG WP.</p>
+    <p>&copy; 2025 MTS-Gaming. All rights reserved. GG WP.</p>
 </footer>
