@@ -87,12 +87,12 @@ This is a fully static website built with [Eleventy (11ty)](https://www.11ty.dev
 
 ### GitHub Pages (Automatic)
 
-This repository is configured to automatically deploy to GitHub Pages via GitHub Actions. The deployment happens automatically when you push to the `main` branch.
+This repository is configured to automatically deploy to GitHub Pages via GitHub Actions. The deployment happens automatically when you push to the `master` branch.
 
 **Setup Requirements:**
 1. Go to your repository's **Settings** → **Pages**
 2. Under "Build and deployment", select **Source**: "GitHub Actions"
-3. Push to the `main` branch or manually trigger the workflow from the Actions tab
+3. Push to the `master` branch or manually trigger the workflow from the Actions tab
 
 The site will be available at: `https://mts-gaming.github.io/mts-gaming.net/`
 
