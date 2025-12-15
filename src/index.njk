@@ -1,0 +1,63 @@
+---
+layout: base.njk
+title: MTS-Gaming - Home
+links:
+  - href: "https://discord.gg/3Fx7Sjt"
+    icon: "🎧"
+    title: "Discord"
+    description: "Join our Discord"
+  - href: "https://steamcommunity.com/groups/mtsgaming"
+    icon: "🎮"
+    title: "Steam"
+    description: "Join our Steam group"
+stats:
+  - number: "69+"
+    label: "MEMBERS"
+  - number: "24/7"
+    label: "ONLINE"
+---
+
+<header class="header">
+    <div class="logo-container">
+        <h1 class="logo glitch" data-text="MTS-GAMING">MTS-GAMING</h1>
+        <p class="tagline">It's all about headshots</p>
+    </div>
+</header>
+
+<main class="main-content">
+    <section class="welcome-section">
+        <div class="welcome-box">
+            <h2 class="section-title">WELCOME TO THE ARENA</h2>
+            <p class="welcome-text">
+                Join our ranks. We dominate the battlefield, 
+                conquer the leaderboards, and forge legends.
+            </p>
+        </div>
+    </section>
+
+    <section class="links-section">
+        <h2 class="section-title">CONNECT WITH US</h2>
+        <div class="links-grid">
+            {% for link in links %}
+            <a href="{{ link.href }}" class="link-card" target="_blank" rel="noopener noreferrer" aria-label="{{ link.title }} (opens in a new window)">
+                <div class="link-icon">{{ link.icon }}</div>
+                <h3>{{ link.title }}</h3>
+                <p>{{ link.description }} <span class="sr-only">(opens in a new window)</span></p>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="stats-section">
+        {% for stat in stats %}
+        <div class="stat-box">
+            <div class="stat-number">{{ stat.number }}</div>
+            <div class="stat-label">{{ stat.label }}</div>
+        </div>
+        {% endfor %}
+    </section>
+</main>
+
+<footer class="footer">
+    <p>&copy; 2025 MTS-Gaming. All rights reserved. GG WP.</p>
+</footer>
