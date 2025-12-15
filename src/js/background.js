@@ -154,22 +154,20 @@
     animate();
     
     // Add glow effect to link cards on hover
-    document.addEventListener('DOMContentLoaded', () => {
-        const linkCards = document.querySelectorAll('.link-card');
+    const linkCards = document.querySelectorAll('.link-card');
+    
+    linkCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transition = 'all 0.3s ease';
+        });
         
-        linkCards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transition = 'all 0.3s ease';
-            });
+        card.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
             
-            card.addEventListener('mousemove', function(e) {
-                const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                this.style.setProperty('--mouse-x', `${x}px`);
-                this.style.setProperty('--mouse-y', `${y}px`);
-            });
+            this.style.setProperty('--mouse-x', `${x}px`);
+            this.style.setProperty('--mouse-y', `${y}px`);
         });
     });
 })();
