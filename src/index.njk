@@ -39,10 +39,10 @@ stats:
         <h2 class="section-title">CONNECT WITH US</h2>
         <div class="links-grid">
             {% for link in links %}
-            <a href="{{ link.href }}" class="link-card" target="_blank" data-glow>
+            <a href="{{ link.href }}" class="link-card" target="_blank" rel="noopener noreferrer" aria-label="{{ link.title }} (opens in a new window)">
                 <div class="link-icon">{{ link.icon }}</div>
                 <h3>{{ link.title }}</h3>
-                <p>{{ link.description }}</p>
+                <p>{{ link.description }} <span class="sr-only">(opens in a new window)</span></p>
             </a>
             {% endfor %}
         </div>

@@ -17,7 +17,7 @@ This is a fully static website built with [Eleventy (11ty)](https://www.11ty.dev
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
+- Node.js (v18 or higher)
 - npm
 
 ### Getting Started

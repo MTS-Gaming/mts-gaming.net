@@ -16,6 +16,19 @@
     --text-secondary: #cccccc;
 }
 
+/* Screen reader only class */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
 body {
     font-family: 'Courier New', monospace;
     background-color: var(--dark-bg);
@@ -357,5 +370,29 @@ body {
     
     .welcome-text {
         font-size: 1rem;
+    }
+}
+
+/* Accessibility: Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    .scanlines {
+        animation: none !important;
+    }
+    
+    .logo {
+        animation: none !important;
+    }
+    
+    .glitch::before,
+    .glitch::after {
+        animation: none !important;
+    }
+    
+    .link-card {
+        transition: none !important;
+    }
+    
+    .stat-box {
+        transition: none !important;
     }
 }

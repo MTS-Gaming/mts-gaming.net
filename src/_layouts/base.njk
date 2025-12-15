@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ description or 'MTS-Gaming - Elite gaming clan with cyberpunk aesthetics and interactive particle effects.' }}">
+    <meta property="og:title" content="{{ title or 'MTS-Gaming' }}">
+    <meta property="og:description" content="{{ description or 'MTS-Gaming - Elite gaming clan with cyberpunk aesthetics and interactive particle effects.' }}">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ title or 'MTS-Gaming' }}">
+    <meta name="twitter:description" content="{{ description or 'MTS-Gaming - Elite gaming clan with cyberpunk aesthetics and interactive particle effects.' }}">
+    <meta name="theme-color" content="#0a0a0a">
     <title>{{ title or "MTS-Gaming" }}</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <canvas id="bg-canvas"></canvas>
-    <div class="scanlines"></div>
+    <canvas id="bg-canvas" aria-hidden="true" role="presentation"></canvas>
+    <div class="scanlines" aria-hidden="true"></div>
     <div class="container">
         {{ content | safe }}
     </div>

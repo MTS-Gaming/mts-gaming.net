@@ -1,5 +1,13 @@
 // Mouse-reactive animated background
 (function() {
+    // Configuration constants
+    const PARTICLE_COUNT = 100;
+    const CONNECTION_DISTANCE = 150;
+    const MOUSE_ATTRACTION_RADIUS = 200;
+    const MOUSE_GLOW_RADIUS = 200;
+    const OFF_SCREEN_POSITION = -9999;
+    const MOUSE_INACTIVE_DELAY = 2000;
+    
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
     
@@ -13,9 +21,7 @@
     
     // Particle system
     const particles = [];
-    const particleCount = 100;
     const mouse = { x: canvas.width / 2, y: canvas.height / 2 };
-    const connectionDistance = 150;
     
     // Colors for particles
     const colors = ['#00ffff', '#ff00ff', '#ffff00', '#00ff00'];
@@ -42,8 +48,8 @@
             const distance = Math.sqrt(dx * dx + dy * dy);
             
             // Updated mouse attraction logic
-            if (mouseActive && distance < 200) {
-                const force = (200 - distance) / 200;
+            if (mouseActive && distance < MOUSE_ATTRACTION_RADIUS) {
+                const force = (MOUSE_ATTRACTION_RADIUS - distance) / MOUSE_ATTRACTION_RADIUS;
                 this.vx += dx * force * 0.01;
                 this.vy += dy * force * 0.01;
             }
@@ -73,14 +79,13 @@
     }
     
     // Initialize particles
-    for (let i = 0; i < particleCount; i++) {
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
         particles.push(new Particle());
     }
     
     // Track mouse position
     let mouseActive = false;
     let mouseInactiveTimeout;
-    const MOUSE_INACTIVE_DELAY = 2000; // 2 seconds
     
     document.addEventListener('mousemove', (e) => {
         mouse.x = e.clientX;
@@ -93,15 +98,15 @@
         // Set timeout to deactivate mouse after delay
         mouseInactiveTimeout = setTimeout(() => {
             mouseActive = false;
-            mouse.x = -9999; // Move gravity well off-screen
-            mouse.y = -9999;
+            mouse.x = OFF_SCREEN_POSITION;
+            mouse.y = OFF_SCREEN_POSITION;
         }, MOUSE_INACTIVE_DELAY);
     });
     
     document.addEventListener('mouseleave', () => {
         mouseActive = false;
-        mouse.x = -9999; // Move gravity well off-screen
-        mouse.y = -9999;
+        mouse.x = OFF_SCREEN_POSITION;
+        mouse.y = OFF_SCREEN_POSITION;
     });
     
     // Touch support for mobile
@@ -120,8 +125,8 @@
                 const dy = particles[i].y - particles[j].y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 
-                if (distance < connectionDistance) {
-                    const opacity = (1 - distance / connectionDistance) * 0.3;
+                if (distance < CONNECTION_DISTANCE) {
+                    const opacity = (1 - distance / CONNECTION_DISTANCE) * 0.3;
                     ctx.save();
                     ctx.globalAlpha = opacity;
                     ctx.strokeStyle = particles[i].color;
@@ -140,7 +145,7 @@
     function drawMouseGlow() {
         if (!mouseActive) return; // Skip drawing if mouse is not active
 
-        const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 200);
+        const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, MOUSE_GLOW_RADIUS);
         gradient.addColorStop(0, 'rgba(0, 255, 255, 0.3)');
         gradient.addColorStop(0.5, 'rgba(255, 0, 255, 0.1)');
         gradient.addColorStop(1, 'rgba(255, 0, 255, 0)');
