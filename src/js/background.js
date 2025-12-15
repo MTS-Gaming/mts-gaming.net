@@ -47,10 +47,6 @@
                 this.vy += dy * force * 0.01;
             }
             
-            // Apply velocity damping
-            this.vx *= 0.99;
-            this.vy *= 0.99;
-            
             // Bounce off edges
             if (this.x < 0 || this.x > canvas.width) {
                 this.vx *= -1;
