@@ -41,7 +41,8 @@
             const dy = mouse.y - this.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
             
-            if (distance < 200) {
+            // Updated mouse attraction logic
+            if (mouseActive && distance < 200) {
                 const force = (200 - distance) / 200;
                 this.vx += dx * force * 0.01;
                 this.vy += dy * force * 0.01;
@@ -77,9 +78,30 @@
     }
     
     // Track mouse position
+    let mouseActive = false;
+    let mouseInactiveTimeout;
+    const MOUSE_INACTIVE_DELAY = 2000; // 2 seconds
+    
     document.addEventListener('mousemove', (e) => {
         mouse.x = e.clientX;
         mouse.y = e.clientY;
+        mouseActive = true;
+
+        // Clear any existing timeout
+        clearTimeout(mouseInactiveTimeout);
+
+        // Set timeout to deactivate mouse after delay
+        mouseInactiveTimeout = setTimeout(() => {
+            mouseActive = false;
+            mouse.x = -9999; // Move gravity well off-screen
+            mouse.y = -9999;
+        }, MOUSE_INACTIVE_DELAY);
+    });
+    
+    document.addEventListener('mouseleave', () => {
+        mouseActive = false;
+        mouse.x = -9999; // Move gravity well off-screen
+        mouse.y = -9999;
     });
     
     // Touch support for mobile
@@ -114,13 +136,15 @@
         }
     }
     
-    // Draw mouse glow effect
+    // Ensure drawMouseGlow respects mouseActive
     function drawMouseGlow() {
+        if (!mouseActive) return; // Skip drawing if mouse is not active
+
         const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 200);
         gradient.addColorStop(0, 'rgba(0, 255, 255, 0.3)');
         gradient.addColorStop(0.5, 'rgba(255, 0, 255, 0.1)');
         gradient.addColorStop(1, 'rgba(255, 0, 255, 0)');
-        
+
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
